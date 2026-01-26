@@ -1,0 +1,47 @@
+/* .app-container{
+
+} */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    background-color: #2c3e50; /* Ciemny, elegancki granat */
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Stylizacja linków */
+nav a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    margin: 0 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease; /* Płynna zmiana koloru */
+}
+
+/* Efekt po najechaniu myszką */
+nav a:hover {
+    background-color: #34495e;
+    color: #3498db; /* Błękitny akcent */
+}
+
+.nav-separator {
+    color: #7f8c8d;
+    user-select: none;
+}
+
+/* Stylizacja głównej treści */
+main {
+    margin: 2rem auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+hr {
+    display: none; /* Ukrywamy hr, bo nav ma box-shadow */
+}

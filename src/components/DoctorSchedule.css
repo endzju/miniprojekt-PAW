@@ -1,0 +1,23 @@
+.bothContainers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.daySelected {
+    background-color: #fff;
+    color: #111;
+}
+
+.gapCol10 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gapRow10 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

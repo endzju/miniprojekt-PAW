@@ -1,0 +1,58 @@
+{
+  "doc_availability": [
+  ],
+  "appointments": [
+    {
+      "id": "5555",
+      "userId": "2222",
+      "doctorId": "1111",
+      "startTime": "2026-01-24T06:30:00",
+      "endTime": "2026-01-24T07:00:00",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "phoneNumber": "500600700",
+      "appointmentType": "konsultacja",
+      "paid": false
+    }
+  ],
+  "canceled_appointments": [
+    {
+      "id": "f6d6",
+      "userId": "2222",
+      "doctorId": "1111",
+      "startTime": "2026-01-29T05:30:00",
+      "endTime": "2026-01-29T06:00:00",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "phoneNumber": "500600700",
+      "appointmentType": "konsultacja",
+      "paid": true
+    },
+    {
+      "id": "921d",
+      "userId": "2222",
+      "doctorId": "1111",
+      "startTime": "2026-01-29T08:30:00",
+      "endTime": "2026-01-29T09:00:00",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "phoneNumber": "500600700",
+      "appointmentType": "konsultacja",
+      "paid": true
+    }
+  ],
+  "doctors": [
+    {
+      "id": "1111",
+      "firstName": "Maciej",
+      "lastName": "Nowak"
+    }
+  ],
+  "users": [
+    {
+      "id": "2222",
+      "firstName": "Jan",
+      "lastName": "Kowalski"
+    }
+  ]
+}

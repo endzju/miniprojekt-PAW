@@ -1,0 +1,143 @@
+* {
+  color: #fafafa;
+  box-sizing: border-box;
+}
+:root {
+  --slot-height: 40px;
+  --hour-col-width: 150px;
+  --emergency-color: #ff5252;
+  --consultation-color: #448aff;
+}
+/* cały kontener na kanendarz, razem z nav i godzinami */
+.calendar-container {   
+  background: #333;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.calendar-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #333;
+}
+.nav-top-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.nav-bot-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: var(--hour-col-width) repeat(7, 1fr);
+  border-top: 2px solid #111;
+  box-sizing: border-box;
+}
+/* styl każdej z komórek w 1 wierszu: godzina, poniedziałek - niedziela */
+.grid-header-cell {
+  padding: 10px;
+  text-align: center;
+  border-right: 2px solid #111;
+  border-bottom: 2px solid #111;
+  background: #333;
+  box-sizing: border-box;
+}
+.hour-cell {
+  border-left: 2px solid #111;
+}
+
+
+.today-highlight { background: #e3f2fd; font-weight: bold; }
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-column: 2 / 9;
+  position: relative;
+  height: 480px; /* Wyświetla około 6h (12 slotów * 40px) */
+  /* overflow-y: scroll; */
+  /* border-left: 1px solid #111; */
+  box-sizing: border-box;
+}
+
+.time-column {
+  grid-column: 1;
+  background: #333;
+}
+
+.time-slot-label {
+  height: var(--slot-height);
+  font-size: 0.8rem;
+  /* color: #777; */
+  text-align: center;
+  line-height: var(--slot-height);
+  border-bottom: 2px solid #111;
+  border-right: 2px solid #111;
+  border-left: 2px solid #111;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.day-column {
+  position: relative;
+  border-right: 2px solid #111;
+  box-sizing: border-box;
+}
+
+.today-col { background: rgba(227, 242, 253, 0.3); }
+
+.slot-grid-line {
+  height: var(--slot-height);
+  border-bottom: 2px solid #111;
+  box-sizing: border-box;
+}
+
+/* Znacznik czasu */
+.current-time-marker {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: red;
+  z-index: 10;
+}
+.current-time-marker::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+}
+
+/* Tooltip */
+.appointment-block:hover .app-tooltip {
+  display: block;
+}
+
+.app-tooltip {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  width: 180px;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,21 @@
+.gapCol10 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gapRow10 {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.submit-button {
+    height: 50px;
+    margin-left: 50px;
+}

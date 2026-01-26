@@ -1,0 +1,29 @@
+.appointment-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid transparent;
+    font-size: 20px;
+}
+
+.emergency {
+    background-color: orange;
+}
+.online { 
+    background-color: rgb(0, 123, 160);
+}
+.normal {
+    background-color: cadetblue;
+}
+
+.free {
+    color: green;
+}
+.full {
+    color: red;
+}
+.past {
+    color: gray;
+}

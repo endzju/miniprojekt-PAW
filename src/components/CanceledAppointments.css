@@ -1,0 +1,16 @@
+.visits {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.visit {
+    width: 250px;
+    height: 260px;
+    background-color: #161920;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 20px;
+}

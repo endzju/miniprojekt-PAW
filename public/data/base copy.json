@@ -1,0 +1,75 @@
+{
+    "doc_availability": [
+        {
+        "appointmentId": "",
+        "userId": "",
+        "doctorId": "1",
+        "startTime": "2026-01-29T10:30:00",
+        "endTime": "2026-01-29T11:00:00",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "service": ""
+        },
+        {
+        "appointmentId": "",
+        "userId": "",
+        "doctorId": "1",
+        "startTime": "2026-01-29T11:00:00",
+        "endTime": "2026-01-29T11:30:00",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "service": ""
+        }
+    ],
+    "appointments": [
+        {
+        "appointmentId": "5",
+        "userId": "1",
+        "doctorId": "1",
+        "startTime": "2026-01-24T06:30:00",
+        "endTime": "2026-01-24T07:00:00",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+        "phoneNumber": "500600700",
+        "service": "konsultacja"
+        },
+        {
+        "appointmentId": "4",
+        "userId": "1",
+        "doctorId": "1",
+        "startTime": "2026-01-29T05:30:00",
+        "endTime": "2026-01-29T06:00:00",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+        "phoneNumber": "500600700",
+        "service": "konsultacja"
+        },
+        {
+        "appointmentId": "1",
+        "userId": "1",
+        "doctorId": "1",
+        "startTime": "2026-01-29T08:30:00",
+        "endTime": "2026-01-29T09:00:00",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+        "phoneNumber": "500600700",
+        "service": "konsultacja"
+        }
+    ],
+    "doctors": [
+        {
+        "doctorId": "1",
+        "firstName": "Maciej",
+        "lastName": "Nowak"
+        }
+    ],
+    "users": [
+        {
+        "userId": "1",
+        "firstName": "Jan",
+        "lastName": "Kowalski"
+        }
+    ]
+}
