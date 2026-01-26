@@ -38,7 +38,7 @@ const CanceledAppointments = () => {
   return (
     <div className="">
       <h2 className="">
-        Odwołane Wizyty:
+        Wizyty odwołane przez lekarza:
       </h2>
       <div className="">
         {canceledList.length === 0 ? (

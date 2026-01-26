@@ -1,20 +1,63 @@
 {
   "doc_availability": [
-  ],
-  "appointments": [
     {
-      "id": "5555",
-      "userId": "2222",
+      "id": "eeee",
+      "userId": "",
       "doctorId": "1111",
       "startTime": "2026-01-24T06:30:00",
       "endTime": "2026-01-24T07:00:00",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
+      "firstName": "",
+      "lastName": "",
       "phoneNumber": "500600700",
       "appointmentType": "konsultacja",
       "paid": false
+    },
+    {
+      "id": "9383",
+      "userId": "",
+      "doctorId": "1111",
+      "startTime": "2026-01-27T08:00",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "appointmentType": "",
+      "paid": false
+    },
+    {
+      "id": "a54d",
+      "userId": "",
+      "doctorId": "1111",
+      "startTime": "2026-01-27T08:30",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "appointmentType": "",
+      "paid": false
+    },
+    {
+      "id": "a0b9",
+      "userId": "",
+      "doctorId": "1111",
+      "startTime": "2026-01-27T09:00",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "appointmentType": "",
+      "paid": false
+    },
+    {
+      "id": "811a",
+      "userId": "",
+      "doctorId": "1111",
+      "startTime": "2026-01-27T09:30",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "appointmentType": "",
+      "paid": false
     }
   ],
+  "appointments": [],
   "canceled_appointments": [
     {
       "id": "f6d6",

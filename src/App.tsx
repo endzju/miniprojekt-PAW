@@ -6,6 +6,7 @@ import Options from './components/Options';
 import DoctorSchedule from './components/DoctorSchedule';
 import CanceledAppointments from './components/CanceledAppointments';
 import Cart from './components/Cart';
+import Appointments from './components/Appointments';
 
 const Home = () => <h1>Strona Główna</h1>;
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "calendar", element: <Calendar /> },
       { path: "options", element: <Options /> },
       { path: "cart", element: <Cart /> },
+      { path: "appointments", element: <Appointments /> },
       { path: "canceled appointments", element: <CanceledAppointments /> },
     ],
   },

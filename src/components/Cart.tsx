@@ -3,27 +3,21 @@ import { format, parseISO } from 'date-fns';
 import { pl } from 'date-fns/locale';
 import type { Appointment, Person } from './types';
 import { useAppContext } from './AppContext';
-import { getUnpaindAppointments, getDoctors } from './consultationsServices';
+import { removeAppointments, addAppointments, getUnpaidAppointments } from './consultationsServices';
 import './Cart.css';
+import Visit from './Visit';
 
 const Cart = () => {
   const [unpaidList, setUnpaidList] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [doctorsMap, setDoctorsMap] = useState<Map<string, string>>(new Map());
+  
   const { db, currentUserId } = useAppContext();
 
   useEffect(() => {
     const loadUnpaid = async () => {
       try {
-        const data = await getUnpaindAppointments(db, currentUserId);
+        const data = await getUnpaidAppointments(db, currentUserId);
         setUnpaidList(data);
-        const doctorsArray: Person[] = await getDoctors(db);
-        const dMap = new Map<string, string>();
-        doctorsArray.forEach(doctor => {
-            const fullName = `${doctor.firstName} ${doctor.lastName}`;
-            dMap.set(doctor.id || '', fullName);
-        });
-        setDoctorsMap(dMap);
       } catch (error) {
         console.error("Błąd podczas ładowania:", error);
       } finally {
@@ -34,6 +28,13 @@ const Cart = () => {
     loadUnpaid();
   }, [db, currentUserId]);
 
+  const pay = async () => {
+    const paidList = unpaidList.map(app => ({ ...app, paid: true }));
+    await removeAppointments(db, unpaidList);
+    await addAppointments(db, paidList);
+    setUnpaidList([]);
+  };
+
   if (loading) return <div className="">Ładowanie...</div>;
 
   return (
@@ -42,7 +43,8 @@ const Cart = () => {
         <h2 className="">
           Nieopłacone Wizyty:
         </h2>
-        <button className="submit-button">
+        <button className="submit-button" onClick={pay}>
+          
           Opłać
         </button>
       </div>
@@ -52,28 +54,7 @@ const Cart = () => {
         ) : (
           <div className="visits">
             {unpaidList.map((app) => (
-              <div 
-                key={app.id} 
-                className="visit"
-              >
-                <div className="">
-                  <p className="">
-                    {format(parseISO(app.startTime), "d MMMM yyyy", { locale: pl })}
-                  </p>
-                  <p className="">
-                    Godzina: <span className="">{format(parseISO(app.startTime), "HH:mm")}</span>
-                  </p>
-                  <p className="">
-                    Pacjent: {app.firstName} {app.lastName}
-                  </p>
-                  <p className="">
-                    Lekarz: {doctorsMap.get(app.doctorId)}
-                  </p>
-                  <p className="">
-                    {app.appointmentType}
-                  </p>
-                </div>
-              </div>
+              <Visit key={app.id} app={app} />
             ))}
           </div>
         )}

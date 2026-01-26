@@ -61,6 +61,7 @@ const DoctorSchedule = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentDoctorId) return alert("Błąd: Nie rozpoznano lekarza.");
+    if (!timeRanges.length) return alert("Proszę podać przynajmniej jeden przedział czasowy.");
 
     const start = parseISO(startDate);
     const end = isRecurring ? parseISO(endDate) : start;
@@ -239,7 +240,15 @@ const DoctorSchedule = () => {
                     <option value="00">00</option>
                     <option value="30">30</option>
                   </select>
+                  <button 
+                    type="button" 
+                    onClick={() => removeTimeRange(index)}
+                    className=""
+                  >X
+                  </button>
+                  
                 </div>
+                
               </div>
             ))}
             <button 

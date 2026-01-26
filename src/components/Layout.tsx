@@ -9,7 +9,8 @@ const Layout = () => {
         | <Link to="/availability">Availability</Link>
         | <Link to="/calendar">Calendar</Link>
         | <Link to="/options">Options</Link>
-        | <Link to="/cart">Appointments</Link>
+        | <Link to="/cart">Cart</Link>
+        | <Link to="/appointments">Appointments</Link>
         | <Link to="/canceled appointments">Canceled Appointments</Link>
       </nav>
       <hr />

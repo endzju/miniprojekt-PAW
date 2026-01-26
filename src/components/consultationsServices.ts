@@ -71,13 +71,20 @@ export const addDoctorAvailability = async (db: string, appointments: Appointmen
   const uniqueNewAppointments = appointments.filter(app => !existingTimes.has(app.startTime));
 
   if (db === 'local') {
-  const requests = uniqueNewAppointments.map(appointment => 
+  const requests = uniqueNewAppointments.map(appointment => {
+    const clearAppointment: Appointment = {
+      ...appointment,
+      paid: false,
+      userId: '',
+      firstName: '',
+      lastName: ''
+    };
     fetch('http://localhost:5000/doc_availability', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(appointment),
+      body: JSON.stringify(clearAppointment),
     })
-  );
+  });
   await Promise.all(requests);
   }
 };
@@ -91,12 +98,12 @@ export const removeDoctorAvailability = async (db: string, appointments: Appoint
   }
 }
 
-export const getUnpaindAppointments = async (db: string, userId: string): Promise<Appointment[]> => {
+export const getUnpaidAppointments = async (db: string, userId: string): Promise<Appointment[]> => {
   const appointments = await fetchAppointments(db);
   return appointments.filter(app => app.userId === userId && !app.paid);
 }
 
-export const getPaindAppointments = async (db: string, userId: string): Promise<Appointment[]> => {
+export const getPaidAppointments = async (db: string, userId: string): Promise<Appointment[]> => {
   const appointments = await fetchAppointments(db);
   return appointments.filter(app => app.userId === userId && app.paid);
 }
@@ -128,6 +135,19 @@ export const addCanceledAppointments = async (db: string, appointments: Appointm
     for (const appointment of appointments) {
       const { id, ...dataWithoutId } = appointment;
       await fetch('http://localhost:5000/canceled_appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataWithoutId),
+      });
+    }
+  }
+}
+
+export const addAppointments = async (db: string, appointments: Appointment[]) => {
+  if (db === 'local') {
+    for (const appointment of appointments) {
+      const { id, ...dataWithoutId } = appointment;
+      await fetch('http://localhost:5000/appointments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataWithoutId),

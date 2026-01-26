@@ -2,6 +2,7 @@
   color: #fafafa;
   box-sizing: border-box;
 }
+
 :root {
   --slot-height: 40px;
   --hour-col-width: 150px;
@@ -87,6 +88,8 @@
   box-sizing: border-box;
   font-size: 15px;
 }
+
+
 
 .day-column {
   position: relative;

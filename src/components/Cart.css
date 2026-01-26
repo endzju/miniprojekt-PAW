@@ -19,3 +19,9 @@
     height: 50px;
     margin-left: 50px;
 }
+.visits {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}

@@ -39,7 +39,7 @@ export const DayColumn: React.FC<Props> = ({ day, timeSlots, appointments, slotH
   return (
     <div className={`day-column ${isToday ? 'today-col' : ''}`}>
       {timeSlots.map(slot => (
-        <div key={slot.label} className="slot-grid-line" style={{ height: slotHeight }} />
+        <div key={slot.label} className={`slot-grid-line ${slot.hours % 4 === 0 ? 'color-slot' : ''}`} style={{ height: slotHeight }} />
       ))}
 
       {groups.map(group => (
