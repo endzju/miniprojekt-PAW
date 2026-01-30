@@ -14,13 +14,18 @@ service cloud.firestore {
     
 
     match /users/{userId} {
-      allow create: if request.auth != null 
+      function isAdmin() {
+        return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+      }
+      allow create: if (request.auth != null 
                     && request.auth.uid == userId 
-                    && request.resource.data.role == "user";
-      allow read: if request.auth != null;
-      allow update: if request.auth != null 
+                    && request.resource.data.role == "user")
+                    || isAdmin();
+      allow read: if request.auth != null || resource.data.role == "doctor";
+      allow update: if (request.auth != null 
                     && request.auth.uid == userId 
-                    && request.resource.data.role == resource.data.role;
+                    && request.resource.data.role == resource.data.role)
+                    || isAdmin();
     }
 
     match /appointments/{appointmentId} {
