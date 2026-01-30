@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { format, addDays, startOfWeek, addWeeks, subWeeks, isWithinInterval } from 'date-fns';
 import { pl } from 'date-fns/locale';
-import type { Appointment, TimeSlot } from '../types';
+import type { Appointment, TimeSlot, Person } from '../types';
 import { DayColumn } from './DayColumn';
 import './Calendar.css';
-import { AppointmentModal } from '../AppointmentModal';
 import { useAppContext } from '../AppContext';
 import { fetchAllAppointments } from '../consultationsServices';
+import { getDoctors } from '../consultationsServices';
 
 const SLOT_HEIGHT = 40;
 
@@ -18,22 +18,36 @@ const Calendar: React.FC = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { db } = useAppContext();
-  // const { currentUserId, setCurrentUserId } = useAppContext();
+  const { db, refresh, currentUser, setDoctorsMap } = useAppContext();
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchAllAppointments(db)
-      .then(data => setAppointments(data))
-      .catch(err => setError(err.message))
-      .finally(() => setIsLoading(false));
-  }, [db]);
+    const loadData = async () => {
+      setIsLoading(true);
+      try {
+        const [appointmentsData, doctorsData] = await Promise.all([
+          fetchAllAppointments(db),
+          getDoctors(db)
+        ]);
+        if (currentUser?.role === 'doctor') {
+          setAppointments(appointmentsData.filter(app => app.doctorId === currentUser?.id));
+        } else {
+          setAppointments(appointmentsData);
+        }
+        const dMap = new Map(doctorsData.map(d => [d.id, d]));
+        setDoctorsMap(dMap);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Wystąpił nieoczekiwany błąd");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 60000);
-    return () => clearInterval(timer);
-  }, []);
+    loadData();
+  }, [db, refresh, currentUser]);
 
   const days = useMemo(() => 
     Array.from({ length: 7 }, (_, i) => addDays(currentWeekStart, i)), 

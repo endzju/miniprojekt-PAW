@@ -3,11 +3,11 @@ import { useAppContext } from './AppContext';
 
 
 const Options: React.FC = () => {
-  const { db, setDb } = useAppContext();
+  const { db, handleDbChange } = useAppContext();
   const databaseOptions = [
     { id: 'local', label: 'Baza Lokalna (JSON)' },
-    { id: 'production', label: 'Baza Produkcyjna' },
-    { id: 'test', label: 'Baza Testowa' }
+    { id: 'firebase', label: 'Firebase' },
+    { id: '', label: '-' }
   ];
 
   return (
@@ -18,7 +18,7 @@ const Options: React.FC = () => {
       <select 
         id="db-select"
         value={db} 
-        onChange={(e) => setDb(e.target.value)}
+        onChange={(e) => handleDbChange(e.target.value)}
         style={{ padding: '5px', borderRadius: '4px' }}
       >
         {databaseOptions.map(option => (

@@ -9,10 +9,13 @@
     font-size: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    flex-direction: row;
+    gap: 20px;
 }
 .cancel-button {
     margin-bottom: 20px;
     background-color: rgb(26, 116, 116);
+    width: 190px;
 }
 .cancel-button:active {
   transform: scale(0.95); /* efekt wciśnięcia */

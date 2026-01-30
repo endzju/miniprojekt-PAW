@@ -1,22 +1,10 @@
 {
   "doc_availability": [
     {
-      "id": "eeee",
+      "id": "a67a",
       "userId": "",
       "doctorId": "1111",
-      "startTime": "2026-01-24T06:30:00",
-      "endTime": "2026-01-24T07:00:00",
-      "firstName": "",
-      "lastName": "",
-      "phoneNumber": "500600700",
-      "appointmentType": "konsultacja",
-      "paid": false
-    },
-    {
-      "id": "9383",
-      "userId": "",
-      "doctorId": "1111",
-      "startTime": "2026-01-27T08:00",
+      "startTime": "2026-01-28T08:00",
       "firstName": "",
       "lastName": "",
       "phoneNumber": "",
@@ -24,10 +12,10 @@
       "paid": false
     },
     {
-      "id": "a54d",
+      "id": "1753",
       "userId": "",
       "doctorId": "1111",
-      "startTime": "2026-01-27T08:30",
+      "startTime": "2026-01-28T08:30",
       "firstName": "",
       "lastName": "",
       "phoneNumber": "",
@@ -35,10 +23,10 @@
       "paid": false
     },
     {
-      "id": "a0b9",
+      "id": "bf8a",
       "userId": "",
       "doctorId": "1111",
-      "startTime": "2026-01-27T09:00",
+      "startTime": "2026-01-30T10:30",
       "firstName": "",
       "lastName": "",
       "phoneNumber": "",
@@ -46,10 +34,21 @@
       "paid": false
     },
     {
-      "id": "811a",
+      "id": "8648",
       "userId": "",
-      "doctorId": "1111",
-      "startTime": "2026-01-27T09:30",
+      "doctorId": "ca8d",
+      "startTime": "2026-01-30T10:00",
+      "firstName": "",
+      "lastName": "",
+      "phoneNumber": "",
+      "appointmentType": "",
+      "paid": false
+    },
+    {
+      "id": "75c0",
+      "userId": "",
+      "doctorId": "ca8d",
+      "startTime": "2026-01-30T10:30",
       "firstName": "",
       "lastName": "",
       "phoneNumber": "",
@@ -57,45 +56,97 @@
       "paid": false
     }
   ],
-  "appointments": [],
+  "appointments": [
+    {
+      "id": "2ec4",
+      "userId": "0f96",
+      "doctorId": "1111",
+      "startTime": "2026-01-30T10:00",
+      "firstName": "gf",
+      "lastName": "gg",
+      "phoneNumber": "34",
+      "appointmentType": "choroba przewlekła",
+      "paid": true,
+      "gender": "M",
+      "age": "33",
+      "info": ""
+    }
+  ],
   "canceled_appointments": [
     {
-      "id": "f6d6",
+      "id": "6665",
       "userId": "2222",
       "doctorId": "1111",
-      "startTime": "2026-01-29T05:30:00",
-      "endTime": "2026-01-29T06:00:00",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "phoneNumber": "500600700",
-      "appointmentType": "konsultacja",
-      "paid": true
+      "startTime": "2026-01-28T08:00",
+      "firstName": "a",
+      "lastName": "a",
+      "phoneNumber": "111222",
+      "appointmentType": "pierwsza wizyta",
+      "paid": true,
+      "gender": "M",
+      "age": "22",
+      "info": ""
     },
     {
-      "id": "921d",
+      "id": "c2bc",
       "userId": "2222",
       "doctorId": "1111",
-      "startTime": "2026-01-29T08:30:00",
-      "endTime": "2026-01-29T09:00:00",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "phoneNumber": "500600700",
-      "appointmentType": "konsultacja",
-      "paid": true
-    }
-  ],
-  "doctors": [
-    {
-      "id": "1111",
-      "firstName": "Maciej",
-      "lastName": "Nowak"
+      "startTime": "2026-01-28T08:30",
+      "firstName": "b",
+      "lastName": "b",
+      "phoneNumber": "222333444",
+      "appointmentType": "pierwsza wizyta",
+      "paid": false,
+      "gender": "M",
+      "age": "33",
+      "info": ""
     }
   ],
   "users": [
     {
       "id": "2222",
       "firstName": "Jan",
-      "lastName": "Kowalski"
+      "lastName": "Kowalski",
+      "login": "janek",
+      "role": "user",
+      "email": "janek@gmail.com",
+      "password": "qqqqqq"
+    },
+    {
+      "id": "1111",
+      "firstName": "Maciej",
+      "lastName": "Nowak",
+      "login": "maciek",
+      "role": "doctor",
+      "email": "maciek@gmail.com",
+      "password": "qqqqqq"
+    },
+    {
+      "id": "0f96",
+      "firstName": "lokaj",
+      "lastName": "lokalny",
+      "login": "loklok",
+      "email": "lokaj@gmail.com",
+      "password": "qqqqqq",
+      "role": "user"
+    },
+    {
+      "id": "a345",
+      "firstName": "admin",
+      "lastName": "admin",
+      "login": "admin",
+      "email": "admin@gmail.com",
+      "password": "qqqqqq",
+      "role": "admin"
+    },
+    {
+      "id": "ca8d",
+      "firstName": "Krzysztof",
+      "lastName": "Zwarty",
+      "email": "krzysztof@gmail.com",
+      "login": "krzzwa",
+      "password": "qqqqqq",
+      "role": "doctor"
     }
   ]
 }

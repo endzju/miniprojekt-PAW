@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { format, parseISO } from 'date-fns';
-import { pl } from 'date-fns/locale';
-import type { Appointment, Person } from './types';
+import { useEffect, useState } from 'react';
+import type { Appointment } from './types';
 import { useAppContext } from './AppContext';
 import { removeAppointments, addAppointments, getUnpaidAppointments } from './consultationsServices';
 import './Cart.css';
@@ -11,12 +9,12 @@ const Cart = () => {
   const [unpaidList, setUnpaidList] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   
-  const { db, currentUserId } = useAppContext();
+  const { db, currentUser } = useAppContext();
 
   useEffect(() => {
     const loadUnpaid = async () => {
       try {
-        const data = await getUnpaidAppointments(db, currentUserId);
+        const data = await getUnpaidAppointments(db, currentUser?.id || '');
         setUnpaidList(data);
       } catch (error) {
         console.error("Błąd podczas ładowania:", error);
@@ -26,7 +24,7 @@ const Cart = () => {
     };
 
     loadUnpaid();
-  }, [db, currentUserId]);
+  }, [db, currentUser?.id || '']);
 
   const pay = async () => {
     const paidList = unpaidList.map(app => ({ ...app, paid: true }));

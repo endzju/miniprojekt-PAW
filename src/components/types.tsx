@@ -7,9 +7,12 @@ export interface Appointment {
   startTime: string;
   firstName: string;
   lastName: string;
-  phoneNumber: string;
   appointmentType: AppointmentType;
+  phoneNumber?: string;
   paid: boolean;
+  gender?: string;
+  age?: string;
+  info?: string;
 }
 
 export interface TimeSlot {
@@ -19,9 +22,11 @@ export interface TimeSlot {
 }
 
 export interface Person {
-  id?: string;
+  id: string;
   login?: string;
   password?: string;
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
+  role?: string;
+  email?: string;
 }

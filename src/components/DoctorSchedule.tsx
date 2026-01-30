@@ -27,7 +27,7 @@ const WEEKDAYS = [
 ];
 
 const DoctorSchedule = () => {
-  const { currentDoctorId, db } = useAppContext();
+  const { db, currentUser } = useAppContext();
   
   // Tryb: jednorazowy / cykliczny
   const [isRecurring, setIsRecurring] = useState(false);
@@ -60,7 +60,6 @@ const DoctorSchedule = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!currentDoctorId) return alert("Błąd: Nie rozpoznano lekarza.");
     if (!timeRanges.length) return alert("Proszę podać przynajmniej jeden przedział czasowy.");
 
     const start = parseISO(startDate);
@@ -89,7 +88,7 @@ const DoctorSchedule = () => {
           while (current < finish){
             appointments.push({
               userId: "",
-              doctorId: currentDoctorId,
+              doctorId: currentUser?.id || '',
               startTime: format(current, "yyyy-MM-dd'T'HH:mm"),
               firstName: "",
               lastName: "",
@@ -102,9 +101,12 @@ const DoctorSchedule = () => {
         }
       });
     });
+    const uniqueAppointments = Array.from(
+      new Map(appointments.map(app => [`${app.doctorId}_${app.startTime}`, app])).values()
+    );
 
     try {
-      await addDoctorAvailability(db, appointments);
+      await addDoctorAvailability(db, uniqueAppointments);
       alert(`Dodano terminy pomyślnie.`);
     } catch (err) {
       alert("Wystąpił błąd podczas zapisu.");
@@ -113,10 +115,9 @@ const DoctorSchedule = () => {
 
   const handleSubmit1 = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!currentDoctorId) return alert("Błąd: Nie rozpoznano lekarza.");
     try {
-      await removeDoctorAvailabilityByDate(db, new Date(deleteDate), currentDoctorId);
-      alert(`Dodano terminy pomyślnie.`);
+      await removeDoctorAvailabilityByDate(db, new Date(deleteDate), currentUser?.id || '');
+      alert(`Dodano absencję pomyślnie.`);
     } catch (err) {
       alert("Wystąpił błąd podczas zapisu.");
     }

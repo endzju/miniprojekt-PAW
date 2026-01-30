@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { format, parseISO } from 'date-fns';
-import { pl } from 'date-fns/locale';
-import type { Appointment, Person } from './types';
+import { useEffect, useState } from 'react';
+import type { Appointment } from './types';
 import { useAppContext } from './AppContext';
-import { fetchCanceledAppointmentsByUser, getDoctors } from './consultationsServices';
+import { fetchCanceledAppointmentsByUser } from './consultationsServices';
 import './CanceledAppointments.css';
+import Visit from './Visit';
 
 const CanceledAppointments = () => {
   const [canceledList, setCanceledList] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
-  const [doctorsMap, setDoctorsMap] = useState<Map<string, string>>(new Map());
-  const { db, currentUserId } = useAppContext();
+  const { db, currentUser } = useAppContext();
 
   useEffect(() => {
     const loadCanceled = async () => {
       try {
-        const data = await fetchCanceledAppointmentsByUser(db, currentUserId);
+        const data = await fetchCanceledAppointmentsByUser(db, currentUser?.id || '');
         setCanceledList(data);
-        const doctorsArray: Person[] = await getDoctors(db);
-        const dMap = new Map<string, string>();
-        doctorsArray.forEach(doctor => {
-          const fullName = `${doctor.firstName} ${doctor.lastName}`;
-          dMap.set(doctor.id || '', fullName);
-        });
-        setDoctorsMap(dMap);
+        
       } catch (error) {
         console.error("Błąd podczas ładowania:", error);
       } finally {
@@ -31,7 +23,7 @@ const CanceledAppointments = () => {
       }
     };
     loadCanceled();
-  }, [db, currentUserId]);
+  }, [db, currentUser]);
 
   if (loading) return <div className="">Ładowanie...</div>;
 
@@ -46,28 +38,7 @@ const CanceledAppointments = () => {
         ) : (
           <div className="visits">
             {canceledList.map((app) => (
-              <div 
-                key={app.id} 
-                className="visit"
-              >
-                <div className="">
-                  <p className="">
-                    {format(parseISO(app.startTime), "d MMMM yyyy", { locale: pl })}
-                  </p>
-                  <p className="">
-                    Godzina: <span className="">{format(parseISO(app.startTime), "HH:mm")}</span>
-                  </p>
-                  <p className="">
-                    Pacjent: {app.firstName} {app.lastName}
-                  </p>
-                  <p className="">
-                    Lekarz: {doctorsMap.get(app.doctorId)}
-                  </p>
-                  <p className="">
-                    {app.appointmentType}
-                  </p>
-                </div>
-              </div>
+              <Visit key={app.id} app={app} canCancelVisit={false} />
             ))}
           </div>
         )}

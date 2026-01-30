@@ -97,7 +97,7 @@
   box-sizing: border-box;
 }
 
-.today-col { background: rgba(227, 242, 253, 0.3); }
+.today-col { background: rgba(20, 20, 21, 0.3); }
 
 .slot-grid-line {
   height: var(--slot-height);
@@ -143,4 +143,10 @@
   width: 180px;
   z-index: 100;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+input, select, option {
+  border: none;
+  border-radius: 5px;
+  padding: 5px; 
 }

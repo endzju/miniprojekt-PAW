@@ -1,37 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { format, parseISO } from 'date-fns';
 import { pl } from 'date-fns/locale';
-import type { Appointment, Person } from './types';
+import type { Appointment } from './types';
 import './Visit.css';
-import { getDoctors, removeAppointments, addDoctorAvailability } from './consultationsServices';
+import { removeAppointments, addDoctorAvailability } from './consultationsServices';
 import { useAppContext } from './AppContext';
 import { useState } from 'react';
 
 interface VisitProps {
   app: Appointment;
   canCancelVisit?: boolean;
+  info?: boolean;
 }
 
-const Visit: React.FC<VisitProps> = ({ app, canCancelVisit = false }) => {
+const Visit: React.FC<VisitProps> = ({ app, canCancelVisit = true, info = false }) => {
   const dateObj = typeof app.startTime === 'string' 
     ? parseISO(app.startTime) 
     : app.startTime; 
-  const { db } = useAppContext();
-  const [doctorsMap, setDoctorsMap] = useState<Map<string, string>>(new Map());
+  const { db, doctorsMap } = useAppContext();
   const [isCancelled, setIsCancelled] = useState(false);
-
-  useEffect(() => {
-    const loadDoctors = async () => {
-    const doctorsArray: Person[] = await getDoctors(db);
-    const dMap = new Map<string, string>();
-    doctorsArray.forEach(doctor => {
-        const fullName = `${doctor.firstName} ${doctor.lastName}`;
-        dMap.set(doctor.id || '', fullName);
-    });
-    setDoctorsMap(dMap);
-    };
-    loadDoctors();
-  }, [app]);
 
   const cancelAppointment = () => {
     removeAppointments(db, [app]);
@@ -52,13 +39,33 @@ const Visit: React.FC<VisitProps> = ({ app, canCancelVisit = false }) => {
           Pacjent: {app.firstName} {app.lastName}
         </p>
         <p className="">
-          Lekarz: {doctorsMap.get(app.doctorId)}
+          Wiek/Płeć: {app.age}/{app.gender}
+        </p>
+        <p className="">
+          Telefon: {app.phoneNumber}
+        </p>
+        <p className="">
+          Lekarz: {doctorsMap.get(app.doctorId)?.firstName} {doctorsMap.get(app.doctorId)?.lastName}
         </p>
         <p className="appointment-type">
           {app.appointmentType}
         </p>
-        <button className="cancel-button" onClick={() => cancelAppointment()}>{isCancelled ? 'Wizyta anulowana' : 'Anuluj wizyte'}</button>
+        {canCancelVisit && (
+          <button 
+            className="cancel-button" 
+            onClick={() => cancelAppointment()}
+            disabled={isCancelled}
+          >
+            {isCancelled ? 'Anulowano' : 'Anuluj wizytę'}
+          </button>
+        )}
       </div>
+      {info && (
+        <div className="visit-info">
+          <p className="visit-info-title">Informacje:</p>
+          <p className="visit-info-text">{app.info}</p>
+        </div>
+      )}
     </div>
   );
 };

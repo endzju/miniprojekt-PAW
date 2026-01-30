@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { format, parseISO } from 'date-fns';
-import { pl } from 'date-fns/locale';
-import type { Appointment, Person } from './types';
+import { useEffect, useState } from 'react';
+import type { Appointment } from './types';
 import { useAppContext } from './AppContext';
-import { getPaidAppointments } from './consultationsServices';
+import { getPaidAppointments, fetchAppointments } from './consultationsServices';
 import './Cart.css';
 import Visit from './Visit';
 
 const Appointments = () => {
   const [PaidList, setPaidList] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
-  const { db, currentUserId } = useAppContext();
+  const { db, currentUser } = useAppContext();
 
   useEffect(() => {
     const loadUnpaid = async () => {
       try {
-        const data = await getPaidAppointments(db, currentUserId);
+        const data = await getPaidAppointments(db, currentUser?.id || '');
         setPaidList(data);
       } catch (error) {
         console.error("Błąd podczas ładowania:", error);
@@ -23,9 +21,20 @@ const Appointments = () => {
         setLoading(false);
       }
     };
+    const loadDoctorAppointments = async () => {
+      try {
+        const data = await fetchAppointments(db);
+        const filteredData = data.filter(app => app.doctorId === currentUser?.id);
+        setPaidList(filteredData);
+      } catch (error) {
+        console.error("Błąd podczas ładowania:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    loadUnpaid();
-  }, [db, currentUserId]);
+    if (currentUser?.role === 'doctor') loadDoctorAppointments(); else loadUnpaid();
+  }, [db, currentUser]);
 
   if (loading) return <div className="">Ładowanie...</div>;
 
