@@ -1,10 +1,19 @@
-## Jak uruchomić?
+# Doctor appointment web aplication
+
+
+Admin can add doctors, choose database (firebase or json file).
+
+Doctors can create and delete/cancel appointments.
+
+Users can see appointments on week calendar, reserve/cancel appointment, pay for appointment (simulated payment), see list of doctors.
+
+## How to run?
 
 ### 1. npm install
-### 2. npm run server (obsługa lokalnego pliku json)
+### 2. npm run server
 ### 3. npm run dev
 
-## opis reguł zabezpieczających po stronie Firebase:
+## Description of security rules on the Firebase side:
 
 ```
 rules_version = '2';
